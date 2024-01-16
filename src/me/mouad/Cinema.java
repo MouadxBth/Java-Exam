@@ -2,35 +2,26 @@ package me.mouad;
 
 import me.mouad.exceptions.PlaceIndisponibleException;
 import me.mouad.film.Film;
+import me.mouad.interfaces.IAdminCinema;
+import me.mouad.interfaces.IVendeurCinema;
 import me.mouad.salle.Salle;
 import me.mouad.salle.implementation.SalleNormale;
 import me.mouad.seance.Seance;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 public class Cinema implements IVendeurCinema, IAdminCinema, Serializable {
-    private final HashSet<Salle> salles = new HashSet<>();
-    private final HashSet<Film> films = new HashSet<>();
-    private final HashSet<Seance> seances = new HashSet<>();
-
-    public HashSet<Film> getFilms() {
-        return films;
-    }
+    private final Map<Integer, Salle> salles = new HashMap<>();
+    private final Map<String, Film> films = new HashMap<>();
+    private final Set<Seance> seances = new HashSet<>();
 
     public Film findFilm(String name) {
-        return films.stream()
-                .filter(film -> film.getTitle().equals(name))
-                .findAny()
-                .orElse(null);
+        return films.get(name);
     }
 
     public Salle findSalle(int number) {
-        return salles.stream()
-                .filter(salle -> salle.getNumber() == number)
-                .findAny()
-                .orElse(null);
+        return salles.get(number);
     }
 
     public Collection<Film> getProgrammedFilms() {
@@ -68,11 +59,11 @@ public class Cinema implements IVendeurCinema, IAdminCinema, Serializable {
     }
 
     public void addFilm(Film film) {
-        films.add(film);
+        films.put(film.getTitle(), film);
     }
 
     public void addSalle(Salle salle) {
-        salles.add(salle);
+        salles.put(salle.getNumber(), salle);
     }
 
     public void addSeance(Seance seance) {

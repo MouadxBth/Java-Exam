@@ -1,4 +1,4 @@
-package me.mouad;
+package me.mouad.interfaces;
 
 import me.mouad.exceptions.PlaceIndisponibleException;
 import me.mouad.film.Film;

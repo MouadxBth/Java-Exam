@@ -1,7 +1,6 @@
-package me.mouad;
+package me.mouad.interfaces;
 
 import me.mouad.exceptions.PlaceIndisponibleException;
-import me.mouad.seance.Seance;
 
 public interface IVendeurCinema extends IUserCinema {
 
